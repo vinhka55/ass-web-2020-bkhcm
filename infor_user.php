@@ -1,12 +1,25 @@
 <?php
     include 'config.php';
+    //var_dump(isset($_POST['name'])) ;
     if($_GET["username"]){
+        
         $username=$_GET["username"];
+        
+    }
+    if(isset($_POST['name'])&&isset($_POST['number_phone'])&&isset($_POST['address'])&&isset($_POST['gender'])){
+        $name=$_POST['name'];
+        $number_phone=$_POST['number_phone'];
+        $address=$_POST['address'];
+        $gender= $_POST['gender'];
+        $sql="UPDATE information SET name='$name', number_phone='$number_phone', address='$address' , gender='$gender' WHERE username='$username'";
+        if(mysqli_query($conn,$sql)){
+            echo 'success';
+        }else{
+            echo "error";
+        }
     }
     
-    //echo $username;
-    $sql="SELECT * FROM tai_khoan WHERE username='$username'";
-    $result=mysqli_query($conn,$sql);
+    
     //var_dump($result);
     
 ?>
@@ -24,28 +37,37 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card" style="width: 100%;" >
-                <h1 style="text-align: center;">WELCOME <?php 
-                echo $username ." your information";
-                ?>
-                </h1>
-                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                    <div class="card-body" style="text-align: center;">
-                    <?php 
-                        while ( $row=mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-                            $id=$row['id'];
-                            $username=$row['username'];
-                            $kind=$row['loai'];
-                           
-                            echo "<p class='card-text'>"."ID: ".$id."</p>";
-                            echo "<p class='card-text'>"."Username: ".$username."</p>";
-                            echo "<p class='card-text'>"."Level : ".$kind."</p>";
-                        }
-                    ?>
-                      
-                      <a href="index.php" class="btn btn-primary">Comeback</a>
-                    </div>
-                  </div>
+            <h1>Welcom <?php echo "<i style='color:green; '>".$username."</i>"?> to information page</h1>
+            <form action="infor_user.php?username=<?php echo $username?>" method="post">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Họ tên</label>
+                    <input name="name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Ví dụ : Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput1">Số điện thoại</label>
+                    <input name="number_phone" type="text" class="form-control" id="formGroupExampleInput1" placeholder="Ví dụ : 0977419999">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Địa chỉ</label>
+                    <input name="address" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ví dụ : Linh Trung , Thủ Đức , Hồ Chí Minh">
+                </div>
+
+                <p>Giới tính</p>
+                <div class="form-check">                  
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="nam">
+                    <label class="form-check-label" for="male">
+                        Nam
+                    </label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="nữ">
+                    <label class="form-check-label" for="female">
+                        Nữ
+                    </label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Update</button>
+                
+            </form>  
             </div>
         </div>
     </div>
