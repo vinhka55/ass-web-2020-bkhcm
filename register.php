@@ -22,7 +22,7 @@
             </div>
             <div class="mt-3 mt-md-5" >
                 <h5>Register your account </h5>
-                <form class="pt-4" action='XuLyDangNhap.php' method='post'>
+                <form class="pt-4" action='XuLyDangKi.php' method='post'>
                     <div class="d-flex flex-column pb-3"> <label for="username">Username</label> <input type="username" name="username" id="username" class="border-bottom border-primary"> </div>
                     <div class="d-flex flex-column pb-3"> <label for="password">Password</label> <input type="password" name="password" id="password" class="border-bottom border-primary"> </div>
                     <div class="d-flex flex-column pb-3"> <label for="comfirmpass">Confirm Password</label> <input type="comfirmpassd" name="comfirmpass" id="comfirmpass" class="border-bottom border-primary"> </div>

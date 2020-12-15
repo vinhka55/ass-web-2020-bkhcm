@@ -20,7 +20,15 @@
             echo "error";
         }
     }
-    
+    $sqlSelect="SELECT * FROM information WHERE username='$username'";
+	$query=mysqli_query($conn,$sqlSelect);
+	while ( $row=mysqli_fetch_array($query,MYSQLI_ASSOC)) {
+		$ten=$row['name'];
+        $sdt=$row['number_phone'];
+        $diaChi=$row['address'];
+        $gioiTinh=$row['gender']; 
+        $sinhNhat=$row['birthday'];
+	}
     
     //var_dump($result);
     
@@ -43,25 +51,25 @@
             <form action="infor_user.php?username=<?php echo $username?>" method="post">
                 <div class="form-group">
                     <label for="formGroupExampleInput">Họ tên</label>
-                    <input name="name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Ví dụ : Nguyễn Văn A">
+                    <input name="name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Ví dụ : Nguyễn Văn A" value="<?php echo $ten; ?>">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput1">Số điện thoại</label>
-                    <input name="number_phone" type="text" class="form-control" id="formGroupExampleInput1" placeholder="Ví dụ : 0977419999">
+                    <input name="number_phone" type="text" class="form-control" id="formGroupExampleInput1" placeholder="Ví dụ : 0977419999" value="<?php echo $sdt; ?>">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Địa chỉ</label>
-                    <input name="address" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ví dụ : Linh Trung , Thủ Đức , Hồ Chí Minh">
+                    <input name="address" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ví dụ : Linh Trung , Thủ Đức , Hồ Chí Minh" value="<?php echo $diaChi; ?>">
                 </div>
 
                 <p>Giới tính</p>
                 <div class="form-check">                  
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="nam">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="nam" <?php if($gioiTinh=='nam') echo "checked" ?>>
                     <label class="form-check-label" for="male">
                         Nam
                     </label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="nữ">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="nữ" <?php if($gioiTinh=='nữ') echo "checked" ?>>
                     <label class="form-check-label" for="female">
                         Nữ
                     </label>
@@ -69,7 +77,7 @@
                 <br>
                 <div class="date-time">
                     <label for="start">Ngày sinh:</label>
-                    <input type="date" id="start" name="birthday"
+                    <input type="date" id="start" name="birthday" value="<?php echo $sinhNhat ?>"
                     min="1990-01-01" max="2030-12-31">
                 </div>
                 <br>
