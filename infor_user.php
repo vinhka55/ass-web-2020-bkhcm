@@ -6,12 +6,14 @@
         $username=$_GET["username"];
         
     }
-    if(isset($_POST['name'])&&isset($_POST['number_phone'])&&isset($_POST['address'])&&isset($_POST['gender'])){
+    //var_dump ($_POST['birthday']); //Y-m-d
+    if(isset($_POST['name'])&&isset($_POST['number_phone'])&&isset($_POST['address'])&&isset($_POST['gender'])&&isset($_POST['birthday'])){
         $name=$_POST['name'];
         $number_phone=$_POST['number_phone'];
         $address=$_POST['address'];
         $gender= $_POST['gender'];
-        $sql="UPDATE information SET name='$name', number_phone='$number_phone', address='$address' , gender='$gender' WHERE username='$username'";
+        $birthday=$_POST['birthday'];
+        $sql="UPDATE information SET name='$name', number_phone='$number_phone', address='$address' , gender='$gender' , birthday='$birthday' WHERE username='$username'";
         if(mysqli_query($conn,$sql)){
             echo 'success';
         }else{
@@ -63,6 +65,12 @@
                     <label class="form-check-label" for="female">
                         Nữ
                     </label>
+                </div>
+                <br>
+                <div class="date-time">
+                    <label for="start">Ngày sinh:</label>
+                    <input type="date" id="start" name="birthday"
+                    min="1990-01-01" max="2030-12-31">
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Update</button>
